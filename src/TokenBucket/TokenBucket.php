@@ -20,7 +20,7 @@ class TokenBucket
 
     /**
      * Fill rate per second
-     * @var int
+     * @var float
      */
     private $fillRate = 5;
 
@@ -76,7 +76,7 @@ class TokenBucket
     }
 
     /**
-     * @return int
+     * @return float
      */
     public function getFillRate()
     {
@@ -167,7 +167,7 @@ class TokenBucket
         }
         return array(
             'X-RateLimit-Limit'     => $this->capacity,
-            'X-RateLimit-Remaining' => $this->bucket['count'],
+            'X-RateLimit-Remaining' => floor($this->bucket['count']),
             'X-RateLimit-Reset'     => $this->bucket['reset'],
         );
     }
