@@ -19,6 +19,8 @@ class Memcached implements StorageInterface
     private $memcachedObj = null;
     private $casArray     = array();
 
+    private $bucketKeyPrefix = 'TokenBucket.';
+
     public function __construct(\Memcached $memcachedObj)
     {
         $this->memcachedObj = $memcachedObj;
@@ -47,6 +49,8 @@ class Memcached implements StorageInterface
 
     public function get($key)
     {
+        $key = $this->bucketKeyPrefix . $key;
+        
         $data       = $this->memcachedObj->get($key, null, $cas);
         $resultCode = $this->memcachedObj->getResultCode();
         if ($resultCode != \Memcached::RES_SUCCESS && $resultCode != \Memcached::RES_NOTFOUND) {
@@ -61,6 +65,8 @@ class Memcached implements StorageInterface
 
     public function set($key, $value)
     {
+        $key = $this->bucketKeyPrefix . $key;
+        
         $this->get($key);
         if (!$value) {
             throw new StorageException(
@@ -87,6 +93,8 @@ class Memcached implements StorageInterface
 
     public function delete($key)
     {
+        $key = $this->bucketKeyPrefix . $key;
+        
         $this->memcachedObj->delete($key);
         $resultCode = $this->memcachedObj->getResultCode();
         if ($resultCode != \Memcached::RES_SUCCESS && $resultCode != \Memcached::RES_NOTFOUND) {

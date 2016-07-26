@@ -12,8 +12,6 @@ use TokenBucket\Storage\StorageInterface;
 
 class TokenBucket
 {
-    private $bucketKeyPrefix = 'TokenBucket.';
-
     /**
      * Max capacity for bucket
      * @var int
@@ -49,7 +47,7 @@ class TokenBucket
     public function __construct($key, StorageInterface $storage, $options = array())
     {
         $this->storage   = $storage;
-        $this->bucketKey = $this->bucketKeyPrefix . $key;
+        $this->bucketKey = $key;
         $this->setOptions($options);
     }
 
