@@ -2,7 +2,7 @@
 
 namespace TokenBucket\Storage;
 
-use PDO;
+use PDO as BasePDO;
 use TokenBucket\Exception\StorageException;
 
 /**
@@ -15,7 +15,7 @@ class PDO implements StorageInterface
 	protected $pdo;
 	protected $tableName;
 
-	public function __construct(PDO $pdo, $tableName = "TokenBucket")
+	public function __construct(BasePDO $pdo, $tableName = "TokenBucket")
 	{
 		$this->pdo = $pdo;
 		$this->tableName = $tableName;
