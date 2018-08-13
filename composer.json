@@ -1,5 +1,5 @@
 {
-  "name": "fustundag/tokenbucket",
+  "name": "jobbely/tokenbucket",
   "description": "PHP TokenBucket implementation for rate limit",
   "keywords": ["token", "bucket", "rate", "limit"],
   "homepage": "http://github.com/fustundag/tokenbucket",
